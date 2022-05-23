@@ -3,7 +3,10 @@ package week_2;
 /*
  * 아래의 EventHandler 를 익명 클래스(anonymous class)로 변경하시오.
  */
-
+/*
+ * ex) 세계에 곤충이 3만개가 있다는것을 설명해야하는데 
+ * 이걸 전부 3만개를 작성할수 없으니 한줄로 3만개가있다. 하고 넘어갈때 사용하곤 한다.
+ */
 
 import java.awt.*;
 import java.awt.event.*;
