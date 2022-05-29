@@ -1,16 +1,15 @@
 package week_3;
 
 /*
- * [8-5]
+ * [8-7]
  * 아래의 코드가 수행되었을 때의 실행 결과를 적으시오.
  */
 
-public class q8_5 {
-	
+public class q8_7 {
 	static void method(boolean b) {
 		try {
 			System.out.println(1);
-			if(b) throw new ArithmeticException();
+			if(b) System.exit(0);
 			System.out.println(2);
 		} catch(RuntimeException r) {
 			System.out.println(3);
@@ -29,20 +28,10 @@ public class q8_5 {
 	} // main
 }
 
-
-/*
- * Object > Throwable > Exception > RuntimeException > ArithmeticException
- */
-
 /*
  * 실행결과
- * 1
- * 3
- * 5
- * 1
- * 2
- * 5
- * 6
+ * 1  !즉시종료
  */
+
 
 
