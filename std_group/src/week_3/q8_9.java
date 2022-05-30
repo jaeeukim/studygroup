@@ -35,6 +35,9 @@ class UnsupprotedFuctionException extends RuntimeException {
 
 //------------------------------------------------------------------------------
 //답
+/*
+ * 
+ */
 class UnsupprotedFuctionException extends RuntimeException {
 	private final int ERR_CODE;
 	
@@ -50,9 +53,10 @@ class UnsupprotedFuctionException extends RuntimeException {
 	public int getErrorCode(){
 		return ERR_CODE;
 	}
-	
+	/*
+	 * 실행결과를 참고하고 작성 / super를 통해 부모로부터 오버라이딩
+	 */
 	public String getMessage() {
-		Exception e = new Exception();
 		return "[" + getErrCode() + "]" + super.getMessage();
 	}
 }

@@ -29,10 +29,7 @@ public class q8_5 {
 	} // main
 }
 
-
-/*
- * Object > Throwable > Exception > RuntimeException > ArithmeticException
- */
+//------------------------------------------------------------------------------
 
 /*
  * 실행결과
@@ -45,4 +42,7 @@ public class q8_5 {
  * 6
  */
 
+/*
+ * Object > Throwable > Exception > RuntimeException > ArithmeticException
+ */
 

@@ -32,12 +32,13 @@ public class q8_6 {
 	}
 }
 
-/*
- * Object > Throwable > Exception > RuntimeException > NullPointerException
- */
-
+//------------------------------------------------------------------------------
 /*
  * 실행결과
  * 3
  * 5
+ */
+
+/*
+ * Object > Throwable > Exception > RuntimeException > NullPointerException
  */
