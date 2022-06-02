@@ -11,7 +11,7 @@ SELECT * FROM EMPLOYEES;
 
 SELECT DEPARTMENT_ID 부서ID
 	 , COUNT(DEPARTMENT_ID) "부서 인원"
-	 , SUM(SALARY) AS "부서별 급여 합계"
+	 , TRUNC(SUM(SALARY)) AS "부서별 급여 합계"
 	 , TRUNC(AVG(SALARY)) AS "부서별 급여 평균"
   FROM EMPLOYEES
  WHERE DEPARTMENT_ID IS NOT NULL
@@ -20,6 +20,18 @@ HAVING COUNT(DEPARTMENT_ID) >= 5
    AND AVG(SALARY) >= 5000
 ORDER BY DEPARTMENT_ID;
 
+/*
+ * 답
+ * SELECT DEPARTMENT_ID 부서ID
+	 , COUNT(*) "부서 인원" 
+	 , TRUNC(SUM(SALARY)) "부서별 급여 합계"
+	 , TRUNC(AVG(SALARY)) "부서별 급여 평균"
+  FROM EMPLOYEES
+ WHERE DEPARTMENT_ID IS NOT NULL
+ GROUP BY DEPARTMENT_ID
+HAVING COUNT(*) >= 5 AND TRUNC(AVG(SALARY)) >= 5000
+ ORDER BY 부서ID;
+ */
 -----------------------------------------------------------------------------------------------------
 /*
  * 이보슬_3주차
@@ -41,8 +53,17 @@ SELECT TRUNC(EXTRACT(YEAR FROM HIRE_DATE), -1) HIRE_DATE
   FROM EMPLOYEES
  GROUP BY ROLLUP(TRUNC(EXTRACT(YEAR FROM HIRE_DATE), -1), DECODE(CEIL(COMMISSION_PCT), '1', 'O', 'X'));
 
+-- DECODE(NVL(COMMISSION_PCT, 0), 0, 'X', 'O')
 
-
+/*
+ * 답
+ * SELECT TRUNC(EXTRACT(YEAR FROM HIRE_DATE), -1) HIRE_DATE
+	 , DECODE(COMMISSION_PCT, NULL, 'X', 'O') COMMISSION_PCT
+	 , TRUNC(AVG(SALARY), -2) "SALARY_AVG"
+	 , COUNT(*)
+	FROM EMPLOYEES
+	GROUP BY ROLLUP(TRUNC
+ */
 -----------------------------------------------------------------------------------------------------
 
 /*
@@ -69,6 +90,39 @@ SELECT  MANAGER_ID
  GROUP BY CUBE(SUBSTR(JOB_ID,1 ,2), MANAGER_ID)
  ORDER BY MANAGER_ID;
 
+/*
+ * 답
+ * SELECT MANAGER_ID
+	 	, CASE WHEN JOB_ID LIKE 'AD%' THEN 'AD'
+					 WHEN JOB_ID LIKE 'IT%' THEN 'IT'
+					 WHEN JOB_ID LIKE 'FI%' THEN 'FI'
+					 WHEN JOB_ID LIKE 'PU%' THEN 'PU'
+					 WHEN JOB_ID LIKE 'ST%' THEN 'ST'
+					 WHEN JOB_ID LIKE 'SA%' THEN 'SA'
+					 WHEN JOB_ID LIKE 'SH%' THEN 'SH'
+					 WHEN JOB_ID LIKE 'AD%' THEN 'AD'
+					 WHEN JOB_ID LIKE 'MK%' THEN 'MK'
+					 WHEN JOB_ID LIKE 'HR%' THEN 'HR'
+					 WHEN JOB_ID LIKE 'PR%' THEN 'PR'
+					 WHEN JOB_ID LIKE 'AC%' THEN 'AC'
+			 END AS 직업
+		, COUNT(*) 총수
+  FROM EMPLOYEES
+ GROUP BY CUBE(MANAGER_ID , CASE WHEN JOB_ID LIKE 'AD%' THEN 'AD'
+																 WHEN JOB_ID LIKE 'IT%' THEN 'IT'
+																 WHEN JOB_ID LIKE 'FI%' THEN 'FI'
+																 WHEN JOB_ID LIKE 'PU%' THEN 'PU'
+																 WHEN JOB_ID LIKE 'ST%' THEN 'ST'
+																 WHEN JOB_ID LIKE 'SA%' THEN 'SA'
+																 WHEN JOB_ID LIKE 'SH%' THEN 'SH'
+																 WHEN JOB_ID LIKE 'AD%' THEN 'AD'
+																 WHEN JOB_ID LIKE 'MK%' THEN 'MK'
+																 WHEN JOB_ID LIKE 'HR%' THEN 'HR'
+																 WHEN JOB_ID LIKE 'PR%' THEN 'PR'
+																 WHEN JOB_ID LIKE 'AC%' THEN 'AC'
+															END)
+ ORDER BY MANAGER_ID;
+ */
 -----------------------------------------------------------------------------------------------------
 
 /*
@@ -105,15 +159,25 @@ SELECT COUNT(*) 인원수
 
 SELECT * FROM EMPLOYEES;
 
-SELECT JOB_ID
-	 , COUNT(*)
-	 , MAX(SALARY)
-	 , MIN(SALARY)
-	 , TRUNC(AVG(SALARY), 1)
+SELECT JOB_ID 직책
+	 , COUNT(*) 직원수
+	 , MAX(SALARY) 최대급여
+	 , MIN(SALARY) 최소급여
+	 , TRUNC(AVG(SALARY),1) 평균급여
   FROM EMPLOYEES
  GROUP BY JOB_ID
  ORDER BY JOB_ID;
 
 
 
-
+/*
+ * 답
+ * select job_id as 직책,
+       count(*) as 직원수,
+       max(salary) as 최대급여,
+       min(salary) as 최소급여,
+       round(avg(salary), 1) as 평균급여
+  from employees
+  group by job_id
+  order by 직책;
+*/
