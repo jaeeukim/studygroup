@@ -25,8 +25,6 @@ public class q9_07 {
 		}
 	}
 	
-	
-	
 	public static void main(String[] args) {
 		System.out.println(contains("12345","23"));
 		System.out.println(contains("12345","67"));
@@ -38,4 +36,11 @@ public class q9_07 {
  * true
  * false
  */
+
+/*엄청 간단하게 표현했다....
+ * 답
+ * return src.indexOf(target) != -1;
+ */
+
+
 
