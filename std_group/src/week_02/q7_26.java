@@ -1,4 +1,4 @@
-package week_2;
+package week_02;
 
 /*
  * Outer 클래스의 내부 클래스 Inner 멤버변수 iv의 값을 출력하시오.

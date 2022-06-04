@@ -1,4 +1,4 @@
-package week_2;
+package week_02;
 /*
  * [7-24]
  * 다음 중 인터페이스의 장점이 아닌 것은?

@@ -1,4 +1,4 @@
-package week_2;
+package week_02;
 
 /*
  * 아래의 EventHandler 를 익명 클래스(anonymous class)로 변경하시오.

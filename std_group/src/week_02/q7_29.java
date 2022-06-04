@@ -1,4 +1,4 @@
-package week_2;
+package week_02;
 
 /*
  * [7-29]
