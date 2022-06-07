@@ -47,12 +47,17 @@ public class q9_06 {
 		for(int i = 0; i < src.length(); i++) {
 			temp[i] = src.charAt(i);
 		}
-		
 		System.arraycopy(temp, 0, cArr, length-temp.length, temp.length);
+		//답 : System.arraycopy(src.toCharArray(),0,chArr,length-src.length(),src.length());
+		//간단하게 요약해냄..
 		
 		return new String(cArr);			
 		//join 왜 안되나 했는데 그냥.. String으로 묶으면 끝이었다ㅎㅎㅎ
 		
+//		String s = "";
+//		for(int i = 0; i < length; i++) {
+//			s += c[i];
+//		}
 	}
 	public static void main(String[] args) {
 		String src = "12345";

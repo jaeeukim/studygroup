@@ -32,9 +32,23 @@ class SutdaCard {
 		if(obj instanceof SutdaCard ) {
 			SutdaCard c = (SutdaCard)obj;
 			return num==c.num && isKwang==c.isKwang;
+			// return num == ((StudaCard)obj).num && isKwang == ((SutdaCard)obj).isKwang;
 		} else {
 			return false;
 		}
+	       
+//	 if(obj instanceof SutdaCard) {    // 만약 obj가 SutdaCard클래스참조변수라면
+//	       if(this.num != ((SutdaCard) obj).num ) { 
+//	             return false;
+//	       }
+//	       if(this.isKwang != ((SutdaCard) obj).isKwang ) {
+//	            return false;
+//	       }
+//	   }
+//	     return true;
+	   
+		
+		
 	}
 	public String toString() {
 		return num + ( isKwang ? "K":"");

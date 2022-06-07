@@ -30,6 +30,26 @@ public class q9_05 {
 			}
 		}
 		
+		//for문
+//		for(int i = 0; i < src.length(); i++) {
+//            pos = src.indexOf(target, pos);
+//            if(pos != -1) {
+//                count++;
+//                pos += target.length();
+//            } else if(pos == -1) {
+//                break;
+//            }
+//        }
+//        return count;
+    
+		//보슬이 
+//		while(src.indexOf(target, pos) != -1) {
+//            pos = src.indexOf(target, pos) + target.length();
+//            ++count;
+//            }
+//        return count;
+		
+		
 	}
 	public static void main(String[] args) {
 		System.out.println(count("12345AB12AB345AB","AB"));

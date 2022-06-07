@@ -24,7 +24,13 @@ public class q9_07 {
 			return true;			
 		}
 	}
-	
+
+	//	if(idx != -1) {
+	//		return true;
+	//	} else {
+	//		return false;			
+	//	}
+
 	public static void main(String[] args) {
 		System.out.println(contains("12345","23"));
 		System.out.println(contains("12345","67"));

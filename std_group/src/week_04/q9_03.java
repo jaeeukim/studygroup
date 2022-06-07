@@ -15,6 +15,16 @@ public class q9_03 {
 		*/
 		path = fullPath.substring(0, 14);
 		fileName = fullPath.substring(15);
+		
+		//규연 언니
+//		fullPath = fullPath.replaceAll("'\\'", "'\'");
+//		int index = fullPath.lastIndexOf("\\");
+//		path = fullPath.substring(0, index);
+//		
+//		fileName = fullPath.substring(index + 1);
+				
+		
+		
 		System.out.println("fullPath:"+fullPath);
 		System.out.println("path:"+path);
 		System.out.println("fileName:"+fileName);

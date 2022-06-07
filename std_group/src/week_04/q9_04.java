@@ -19,7 +19,7 @@ public class q9_04 {
 				System.out.print(ch);
 			}
 			System.out.print(dataArr[i] + "\n");
-		}
+		}	
 	}
 	
 	public static void main(String[] args) {
