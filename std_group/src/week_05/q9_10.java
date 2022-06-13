@@ -39,14 +39,12 @@ public class q9_10 {
 			// 3, 4
 			if(alignment == 0) {
 				System.arraycopy(stArr, 0, cArr, 0, stArr.length);
-				return new String(cArr);
 			} else if(alignment == 1) {
 				System.arraycopy(stArr, 0, cArr, (length - str.length())/2, stArr.length);
-				return new String(cArr);
 			} else {
 				System.arraycopy(stArr, 0, cArr, (length - str.length()), stArr.length);
-				return new String(cArr);
 			}
+			return new String(cArr);
 		}
 	}
 

@@ -15,7 +15,7 @@ public class q9_09 {
 	(1) delChar . 메서드를 작성하시오
 	*/
 	public static String delChar(String src, String delCh) {
-		StringBuffer sb = new StringBuffer(src.length());
+		StringBuffer sb = new StringBuffer(src);  //src.length라고 해서 안나왔음
 		
 		for(int i = 0; i < sb.length(); i++) {
 			for(int ch = 0; ch < delCh.length(); ch++) {
@@ -26,6 +26,7 @@ public class q9_09 {
 		}
 		return sb.toString();
 	}
+
 	
 	public static void main(String[] args) {
 		System.out.println("(1!2@3^4~5)"+" -> "

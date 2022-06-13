@@ -20,7 +20,7 @@ public class q9_13 {
 			return 0;
 		
 		for(int i = 0; i < src.length(); i++) {
-			index = src.indexOf(key, index);
+			index = src.indexOf(key, pos);
 			if(index != -1) {
 				count++;
 				index += key.length();

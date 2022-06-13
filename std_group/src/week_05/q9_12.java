@@ -15,8 +15,9 @@ package week_05;
  */
 public class q9_12 {
 	private static int getRand(int from, int to) {
-
-		int num = (int)(Math.random() * Math.abs(from - to + 1)) + Math.min(from, to);
+		//정수 랜덤
+		// (int)Math.random() * (최대값 - 최소값) + 최소값
+		int num = (int)(Math.random() * Math.abs(to - from + 1)) + Math.min(from, to);
 		return num; 
 	}
 	
