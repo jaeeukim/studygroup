@@ -12,7 +12,7 @@ public class q10_08 {
 	public static void main(String[] args) {
 		ZoneId sid = ZoneId.of("Asia/Seoul"); 
 		ZoneId nid = ZoneId.of("America/New_York"); 
-	
+	 
 		ZonedDateTime seoulTime = ZonedDateTime.now();
 		ZonedDateTime nyTime = ZonedDateTime.now().withZoneSameInstant(nid);
 		
