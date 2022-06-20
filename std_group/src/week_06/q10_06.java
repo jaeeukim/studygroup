@@ -2,7 +2,7 @@ package week_06;
 
 import java.util.Calendar;
 import java.util.Date;
-
+ 
 /*
  * [10-6]
  * 자신이 태어난 날부터 지금까지 며칠이 지났는지 계산해서 출력하시오.
