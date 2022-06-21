@@ -28,6 +28,7 @@ public class q10_07 {
  * [답]
  * LocalDate date = LocalDate.of(2016, 12, 1);
  * System.out.println(date.with(dayOfWeekInMonth(4, TUESDAY)));
+ * import java.time.DateOfWeek.*; 사용해야함
  */
 /*
  * [실행결과]

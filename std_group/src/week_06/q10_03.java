@@ -12,14 +12,16 @@ public class q10_03 {
 		
 		DecimalFormat df1 = new DecimalFormat("#,###.##");
 		DecimalFormat df2 = new DecimalFormat("#");
-		DecimalFormat df3 = new DecimalFormat("#,####");
+		DecimalFormat df3 = new DecimalFormat("#,####"); // "#,###0"으로도 가능하다.
 		
+		// parseInt메서드는 콤마가있는 문자열을 숫자로 변환할수 없다.
 		try {
 			Number num = df1.parse(data);
 			double d = num.doubleValue();
 			
 			System.out.println("data:"+data);
-			System.out.println("반올림:"+ df2.format(d));
+			System.out.println("반올림:"+ df2.format(d));  //Math.round
+			// System.out.println("반올림:"+ Math.round(d));도 가능
 			System.out.println("만단위:"+df3.format(d));
 			
 		}catch(Exception e) {

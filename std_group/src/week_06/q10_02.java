@@ -80,6 +80,37 @@ public class q10_02 {
 				
 }
 
+/*
+ * // 1. from또는 to가 null이면 0을 반환한다
+	if(from==null || to==null) return 0;
+	// 2. from와 to가 같고 날짜가 21일이면 1을 반환한다
+	if(from.equals(to) && from.get(Calendar.DAY_OF_MONTH)==21) {
+		return 1;
+	}
+	int fromYear = from.get(Calendar.YEAR);
+	int fromMon = from.get(Calendar.MONTH);
+	int fromDay = from.get(Calendar.DAY_OF_MONTH);
+	int toYear = to.get(Calendar.YEAR);
+	int toMon = to.get(Calendar.MONTH);
+	int toDay = to.get(Calendar.DAY_OF_MONTH);
+	
+	// 3. to와 from이 몇 개월 차이인지 계산해서 변수 monDiff에 담는다
+	int monDiff = (toYear * 12 + toMon) - (fromYear * 12 + fromMon);
+	
+	// 4. monDiff가 음수이면 0을 반환한다
+	if(monDiff < 0) return 0;
+	
+	// 5. from (DAY_OF_MONTH) 21 만일 의 일 이 일이거나 이전이고
+	// to (DAY_OF_MONTH) 21 monDiff 1 . 의 일 이 일이거나 이후이면 의 값을 증가시킨다
+	if(fromDay <= 21 && toDay >= 21)
+		monDiff++;
+	
+	// 6. 만일 from의 일(DAY_OF_MONTH)이 21일 이후고
+	// to의 일(DAY_OF_MONTH)이 일 21이전이면 monDiff의 값을 1 감소시킨다
+	if(fromDay > 21 && toDay < 21)
+		monDiff--;
+ * 
+ */
 //[실행결과]
 //2010-01-01 ~ 2010-01-01:0
 //2010-01-21 ~ 2010-01-21:1

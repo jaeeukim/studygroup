@@ -1,5 +1,6 @@
 package week_06;
  
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
@@ -43,7 +44,28 @@ public class q10_05 {
 		} catch (Exception e){
 			return 0;
 		}
+	
+		/*
+		 * [보슬이 답]
+		Date date1 = null;
+		Date date2 = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
+		try {
+			date1 = sdf.parse(yyyymmdd1);
+			date2 = sdf.parse(yyyymmdd2);
+		} catch (Exception e){
+			return 0;
+		}
+		
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(date1);
+		Calendar cal2 = Calendar.getInstance();
+		cal1.setTime(date2);
+		
+		long dateDiff = ((cal1.getTimeInMillis() - cal2.getTimeInMillis()) / (60*60*1000*24));
+		return (int)dateDiff;
+		*/
 	}
 	
 	
