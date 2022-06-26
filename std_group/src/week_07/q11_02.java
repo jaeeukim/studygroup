@@ -1,0 +1,40 @@
+package week_07;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Stack;
+import java.util.TreeSet;
+
+/*
+ * [11-2]
+ * 다음 코드의 실행결과를 적으시오.
+ */
+
+/* ->예상결과
+ * 362227
+ * HashSet에서 3627
+ * TreeSet에서 2367
+ * pop하면 7632?
+ * 
+ * =>7632
+ */
+public class q11_02 {
+	public static void main(String[] args) {
+		ArrayList list = new ArrayList();
+		
+		list.add(3);
+		list.add(6);
+		list.add(2);
+		list.add(2);
+		list.add(2);
+		list.add(7);
+		
+		HashSet set = new HashSet(list);
+		TreeSet tset = new TreeSet(set);
+		Stack stack = new Stack();
+		stack.addAll(tset);
+		
+		while(!stack.empty())
+		System.out.println(stack.pop());
+		}
+}
