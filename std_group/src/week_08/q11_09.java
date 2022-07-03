@@ -39,7 +39,7 @@ class Student11_09 implements Comparable {
 		return (int)((getTotal()/ 3f)*10+0.5)/10f;
 	}
 	public int compareTo(Object o) {
-		if(o instanceof Student) {
+		if(o instanceof Student11_09) {
 			Student11_09 tmp = (Student11_09)o;
 			return tmp.total - this.total;
 		} else {
@@ -74,7 +74,7 @@ class ClassTotalComparator implements Comparator {
 			int result = s1.ban - s2.ban;
 			
 			if(s1.ban == s2.ban) {
-				result = s1.classRank - s2.classRank;
+				result = s2.total - s1.total;
 			}
 			return result;
 		}
@@ -104,32 +104,44 @@ public class q11_09 {
 				1.4 현재 반과 총점과 등수를 이전 반(prevBan)
 					이전 총점(prevTotal) 이전 등수(prevRank)에 저장한다.
 		*/
-		for(int i = 0; i < length; i++) {
+		for(int i = 0, n = 0; i < length; i++, n++) {
 			Student11_09 s = (Student11_09) list.get(i);
 			
 			if(s.ban != prevBan) {
 				prevRank = -1;
 				prevTotal = -1;
+				n = 0;
 			}
 			if(s.total == prevTotal) {
 				s.classRank = prevRank; 
 			} else {
-				s.classRank = i + 1;
+				s.classRank = n + 1;
 			}
-			prevRank = s.classRank;
-			prevTotal = s.total;
 			prevBan = s.ban;
-			
-			
+			prevRank = s.classRank;
+			prevTotal = s.total;			
 		}
+
+	} // public static void calculateClassRank(List list) {
+	public static void calculateSchoolRank(List list) {
+		Collections.sort(list);
 		
+		int prevRank = -1;
+		int prevTotal = -1;
+		int length = list.size();
 		
-		
-		
-		} // public static void calculateClassRank(List list) {
-		public static void calculateSchoolRank(List list) {
-		/* */ 
+		for(int i = 0; i < length; i++) {
+			Student11_09 s = (Student11_09) list.get(i);
+			
+			if(s.total == prevTotal) {
+				s.schoolRank = prevRank; 
+			} else {
+				s.schoolRank = i + 1;
+			}
+			prevRank = s.schoolRank;
+			prevTotal = s.total;			
 		}
+	}
 		
 		public static void main(String[] args) {
 			ArrayList list = new ArrayList();

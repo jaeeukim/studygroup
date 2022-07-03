@@ -33,6 +33,10 @@ class SutdaCard {
 	public String toString() {
 		return num + ( isKwang ? "K":"");
 	}
+	
+	public int hashCode() {
+		return toString().hashCode();
+	}
 }
 
 public class q11_11 {
