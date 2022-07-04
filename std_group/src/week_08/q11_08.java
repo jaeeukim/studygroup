@@ -44,12 +44,14 @@ class Student11_08 implements Comparable {
 	
 	@Override
 	public int compareTo(Object o) {
-		
-		
 		if(o instanceof Student11_08) {
 			Student11_08 tmp = (Student11_08) o;
 			
+			// 삼항연산자로 간단하게
+			// return this.total == s.total ? 0 : (this.total < tmp.total ? 1 : -1);
+			
 			return tmp.getTotal() - total;
+			//return (total - tmp.getTotal()) * -1;
 		}else {
 			return -1;
 		}
@@ -85,6 +87,8 @@ public class q11_08 {
 			}
 			prevTotal = s.total;
 			prevRank = s.schoolRank;
+			
+		
 		}
 		
 		
@@ -93,10 +97,10 @@ public class q11_08 {
 		}
 		public static void main(String[] args) {
 			ArrayList list = new ArrayList();
-			list.add(new Student11_08("이자바",1,4,70,90,70)); 
-			list.add(new Student11_08("안자바",1,5,60,100,80)); 
-			list.add(new Student11_08("홍길동",1,1,100,100,100)); 
-			list.add(new Student11_08("남궁성",1,2,90,70,80)); 
+			list.add(new Student11_08("이자바",2,1,70,90,70)); 
+			list.add(new Student11_08("안자바",2,2,60,100,80)); 
+			list.add(new Student11_08("홍길동",1,3,100,100,100)); 
+			list.add(new Student11_08("남궁성",1,1,90,70,80)); 
 			list.add(new Student11_08("김자바",1,3,80,80,90)); 
 			calculateSchoolRank(list);
 			Iterator it = list.iterator();
@@ -106,3 +110,17 @@ public class q11_08 {
 		}
 
 }
+/*
+ * [실행결과]
+ * 홍길동,1,3,100,100,100,300,100.0,1
+ * 김자바,1,2,80,80,90,250,83.3,2
+ * 안자바,2,2,60,100,80,240,80.0,3
+ * 남궁성,1,1,90,70,80,240,80.0,3
+ * 이자바,2,1,70,90,70,230,76.7,5
+ * 
+ */
+
+
+
+
+

@@ -21,7 +21,8 @@ class BanNoAscending implements Comparator {
 			Student s1 = (Student) o1;
 			Student s2 = (Student) o2;
 			
-			
+			// 삼항으로 간단하게 작성할수 있다.
+			// return s1.ban==s2.ban ? s1.no - s2.no : s1.ban - s2.ban;
 			int result = s1.ban - s2.ban;
 			
 			if(s1.ban == s2.ban) {

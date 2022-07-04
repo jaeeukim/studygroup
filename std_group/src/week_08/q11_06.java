@@ -20,9 +20,9 @@ public class q11_06 {
 		Student s1 = new Student("", 0, 0, from, from, from);
 		Student s2 = new Student("", 0, 0, to, to, to);
 		
+		// System.out.println(tset.subSet(s1, s2));
 		return tset.subSet(s1, s2).size();
 
-		
 	}
 	public static void main(String[] args) {
 		TreeSet set = new TreeSet(new Comparator() {

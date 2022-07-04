@@ -47,8 +47,17 @@ class Student implements Comparable{
 			return -1;
 		}
 	}
-	
-	
+	/*
+	 * 강사님 방식으로 푼 버전
+	public int compareTo(Object o) {
+        Student1 stuName = (Student1)o;
+        if(name.compareTo(stuName.name) > 0) { // 자기 자신과 비교
+            return 1;
+        } else if (name.compareTo(stuName.name) < 0){
+            return -1;
+        } return 0;
+    }
+    */
 }
 
 public class q11_05 {

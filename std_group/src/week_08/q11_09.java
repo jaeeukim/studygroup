@@ -104,9 +104,11 @@ public class q11_09 {
 				1.4 현재 반과 총점과 등수를 이전 반(prevBan)
 					이전 총점(prevTotal) 이전 등수(prevRank)에 저장한다.
 		*/
-		for(int i = 0, n = 0; i < length; i++, n++) {
+		
+		// n을 따로 빼낸 식
+		int n = 0;
+		for(int i = 0; i < length; i++) {
 			Student11_09 s = (Student11_09) list.get(i);
-			
 			if(s.ban != prevBan) {
 				prevRank = -1;
 				prevTotal = -1;
@@ -119,8 +121,28 @@ public class q11_09 {
 			}
 			prevBan = s.ban;
 			prevRank = s.classRank;
-			prevTotal = s.total;			
+			prevTotal = s.total;	
+			n++;
 		}
+		
+		// n을 안에 넣은 식
+//		for(int i = 0, n = 0; i < length; i++, n++) {
+//			Student11_09 s = (Student11_09) list.get(i);
+//			
+//			if(s.ban != prevBan) {
+//				prevRank = -1;
+//				prevTotal = -1;
+//				n = 0;
+//			}
+//			if(s.total == prevTotal) {
+//				s.classRank = prevRank; 
+//			} else {
+//				s.classRank = n + 1;
+//			}
+//			prevBan = s.ban;
+//			prevRank = s.classRank;
+//			prevTotal = s.total;			
+//		}
 
 	} // public static void calculateClassRank(List list) {
 	public static void calculateSchoolRank(List list) {

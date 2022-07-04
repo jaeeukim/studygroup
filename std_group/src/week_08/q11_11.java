@@ -1,6 +1,7 @@
 package week_08;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 /*
  * [11-11]
@@ -30,13 +31,29 @@ class SutdaCard {
 		}
 	}
 	
+
+
 	public String toString() {
 		return num + ( isKwang ? "K":"");
 	}
 	
+	
 	public int hashCode() {
 		return toString().hashCode();
 	}
+	
+	//오류남
+//	public int hashCode() {
+//		return (num + isKwang).hashCode();
+//	}
+	
+	
+	//Source -> hashCode 생성하면 뚝딱...
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(isKwang, num);
+//	}
+	
 }
 
 public class q11_11 {
