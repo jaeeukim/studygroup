@@ -29,18 +29,20 @@ INSERT INTO score_t VALUES (2205,  88, 100, 82, 74, NULL, NULL);
 -- 2. update 사용 합계
 UPDATE score_t
    SET score_total = math + eng + kor + java
- WHERE STU_ID IN (2201, 2202, 2203, 2204, 2205);
+ WHERE STU_ID IN (2201, 2202, 2203, 2204, 2205); -- WHERE 안써도 됨
 
 -- 3. update사용 평균
 UPDATE score_t
    SET score_avg = (SCORE_TOTAL/4)
- WHERE STU_ID IN (2201, 2202, 2203, 2204, 2205);
+ WHERE STU_ID IN (2201, 2202, 2203, 2204, 2205); -- WHERE 안써도 됨
 
 -- 4. 서브쿼리
 SELECT 순위
      , stu_id
      , score_avg
-  FROM (SELECT stu_id, score_avg, DENSE_RANK() OVER(ORDER BY score_avg * -1) AS 순위
+  FROM (SELECT stu_id
+  			 , score_avg
+  			 , DENSE_RANK() OVER(ORDER BY score_avg DESC) AS 순위
           FROM score_t);
 
 
@@ -72,11 +74,11 @@ SELECT 순위
 SELECT STU_ID
 	 , STU_NAME 
 	 , STU_AGE 
-	 , REPLACE(STU_PHONE, SUBSTR(STU_PHONE, 10, 4), '****') STU_PHONE
+	 , RPAD(SUBSTR(STU_PHONE, 1, 9), 13, '*')
 	 , STU_ADDRESS 
 	 , CLUB_ID 
 FROM STUDENT_TB 
- WHERE STU_PHONE IN (SELECT STU_PHONE
+ WHERE STU_ID IN (SELECT STU_ID
 					   FROM STUDENT_TB
 					   WHERE STU_PHONE NOT LIKE '%5%'
 					     AND SUBSTR(STU_ADDRESS, 1, 3)='서울시');
@@ -86,34 +88,29 @@ ALTER TABLE LEVEL_TB ADD stu_teacher VARCHAR2(20);
 
 SELECT * FROM level_tb;
 -- 3. UPDATE
-UPDATE level_tb
-   SET stu_teacher = '송중기'
- WHERE LEVEL_NO = 1 AND CLASS_NO = 1;
-UPDATE level_tb
-   SET stu_teacher = '박보영'
- WHERE LEVEL_NO = 1 AND CLASS_NO = 2;
-UPDATE level_tb
-   SET stu_teacher = '남주혁'
- WHERE LEVEL_NO = 1 AND CLASS_NO = 3;
-UPDATE level_tb
-   SET stu_teacher = '김우빈'
- WHERE LEVEL_NO = 2 AND CLASS_NO = 1;
-UPDATE level_tb
-   SET stu_teacher = '이광수'
- WHERE LEVEL_NO = 2 AND CLASS_NO = 2;
-UPDATE level_tb
-   SET stu_teacher = '송지효'
- WHERE LEVEL_NO = 2 AND CLASS_NO = 3;
-UPDATE level_tb
-   SET stu_teacher = '서인국'
- WHERE LEVEL_NO = 3 AND CLASS_NO = 1;
-UPDATE level_tb
-   SET stu_teacher = '김수현'
- WHERE LEVEL_NO = 3 AND CLASS_NO = 2;
-UPDATE level_tb
-   SET stu_teacher = '한지민'
- WHERE LEVEL_NO = 3 AND CLASS_NO = 3;
+UPDATE level_tb SET stu_teacher = '송중기' WHERE LEVEL_NO = 1 AND CLASS_NO = 1;
+UPDATE level_tb SET stu_teacher = '박보영' WHERE LEVEL_NO = 1 AND CLASS_NO = 2;
+UPDATE level_tb SET stu_teacher = '남주혁' WHERE LEVEL_NO = 1 AND CLASS_NO = 3;
+UPDATE level_tb SET stu_teacher = '김우빈' WHERE LEVEL_NO = 2 AND CLASS_NO = 1;
+UPDATE level_tb SET stu_teacher = '이광수' WHERE LEVEL_NO = 2 AND CLASS_NO = 2;
+UPDATE level_tb SET stu_teacher = '송지효' WHERE LEVEL_NO = 2 AND CLASS_NO = 3;
+UPDATE level_tb SET stu_teacher = '서인국' WHERE LEVEL_NO = 3 AND CLASS_NO = 1;
+UPDATE level_tb SET stu_teacher = '김수현' WHERE LEVEL_NO = 3 AND CLASS_NO = 2;
+UPDATE level_tb SET stu_teacher = '한지민' WHERE LEVEL_NO = 3 AND CLASS_NO = 3;
 
+/*
+ * UPDATE LEVEL_TB
+   SET stu_teacher = (CASE WHEN LEVEL_NO = 1 AND CLASS_NO = 1 THEN '송중기'
+					       WHEN LEVEL_NO = 1 AND CLASS_NO = 2 THEN '박보영'
+				      	   WHEN LEVEL_NO = 1 AND CLASS_NO = 3 THEN '남주혁'
+					       WHEN LEVEL_NO = 2 AND CLASS_NO = 1 THEN '김우빈'
+					       WHEN LEVEL_NO = 2 AND CLASS_NO = 2 THEN '이광수'
+					       WHEN LEVEL_NO = 2 AND CLASS_NO = 3 THEN '송지효'
+					       WHEN LEVEL_NO = 3 AND CLASS_NO = 1 THEN '서인국'
+					       WHEN LEVEL_NO = 3 AND CLASS_NO = 2 THEN '김수현'
+					       WHEN LEVEL_NO = 3 AND CLASS_NO = 3 THEN '한지민'
+					       END);
+ */
 SELECT * FROM LEVEL_TB ;
 SELECT * FROM STUDENT_TB;
 -- 4. 서브쿼리 활용하여 출력하기
@@ -125,7 +122,8 @@ SELECT stu_id
  WHERE stu_id IN (SELECT STU_ID
  					FROM LEVEL_TB 
  				   WHERE STU_TEACHER = '송중기');
-
+ 				  
+SELECT * FROM LEVEL_TB;				  
  				  
 /*
  * <김규연>
@@ -150,7 +148,7 @@ SELECT * FROM JOBS;
 SELECT * FROM EMPLOYEES;
 -- 2. 서브쿼리로 조회하기
 SELECT EMPLOYEE_ID
-     , FIRST_NAME || LAST_NAME NAME
+     , FIRST_NAME || '' || LAST_NAME NAME
      , JOB_ID
      , SALARY
   FROM EMPLOYEES
@@ -168,10 +166,13 @@ SELECT 순위
 	 , bread_total
 	 , bread_type
 	 , bread_price
- FROM (SELECT bread_name, bread_total, bread_type, bread_price
-             , DENSE_RANK() OVER(ORDER BY bread_price DESC) AS 순위
-         FROM bread_tb);
--- 왜.. 답 사진에 예산ㄹ꽈배기 없지...?
+ FROM (SELECT bread_name
+ 			, bread_total
+ 			, bread_type
+ 			, bread_price
+            , DENSE_RANK() OVER(ORDER BY bread_price DESC) AS 순위
+         FROM bread_tb)
+ WHERE 순위 <= 5;
 
 
 /*
@@ -208,7 +209,7 @@ ALTER TABLE ref_mart_tb DROP CONSTRAINT PK_REF_MART_T_R_BAR;
 DROP TABLE ref_mart_tb;
 
 -- 3. 자료형 변경
-ALTER TABLE emp_mart_tb MODIFY name VARCHAR2(20);
+ALTER TABLE emp_mart_tb MODIFY name VARCHAR2(20); -- 10 -> 20으로 변경
 
 
 -- 4. mart_tb에 값추가
