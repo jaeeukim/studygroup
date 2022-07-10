@@ -50,6 +50,8 @@ INSERT INTO STUDENT_T VALUES (2205, '최민지', 'C-02', '여', '');
 -- 4. 삭제
 -- TRUNCATE를 사용해서 삭제한다.
 -- TRUNCATE는 테이블을 초기상태로 돌려놓기 때문에 ROLLBACK이 불가능하다.
+-- DROP 후 다시 CREATE 하고 COMMIT하기 때문이다.
+-- DELETE 는 공간이 남아요.. 
 
 /* 이보슬_문제06
  * 
@@ -99,7 +101,7 @@ INSERT INTO STUDENT_T VALUES (2205, '최민지', 'C-02', '여', '');
  * 		- 학번 : 202202, 학생명 : 강동원, 나이 : 18, 전화번호 : 010-1212-1212, 주소 : 서울시 마포구, 동아리id : 1
  * 		- 학번 : 202203, 학생명 : 수지 , 나이 : 19, 전화번호 : 010-0909-0110, 주소 : 서울시 영등포구, 동아리id : 2
  * 		- 학번 : 202204, 학생명 : 박보검, 나이 : 17, 전화번호 : 010-3040-5060, 주소 : 서울시 마포구, 동아리id : 2
- * 		- 학번 : 202205, 학생명 : 송강, 	 나이 : 19, 전화번호 : 010-9112-2323, 주소 : 경기도 하남시, 동아리id : 1
+ * 		- 학번 : 202205, 학생명 : 송강,  나이 : 19, 전화번호 : 010-9112-2323, 주소 : 경기도 하남시, 동아리id : 1
  * 		- 학번 : 202206, 학생명 : 한소희, 나이 : 17, 전화번호 : 010-6233-6970, 주소 : 경기도 구리시
  * 
  */
@@ -273,31 +275,15 @@ SELECT * FROM BREAD_T;
 SELECT * FROM DATE_MANAGER_T ;
 
 /* 
-CREATE TABLE bread_t (
-	  bread_id      VARCHAR2(20)       CONSTRAINT PK_BREAD_T_BREAD_NO PRIMARY KEY
-	, bread_name    VARCHAR2(20)  CONSTRAINT NN_BREAD_T_BREAD_NAME NOT NULL
-	, bread_total   NUMBER        DEFAULT(0)
-	, bread_type    VARCHAR2(20)  DEFAULT(0)
-	, bread_price   NUMBER 		  DEFAULT(0)
-);
--- 2, 3
-CREATE TABLE bread_ref (
-	  BREAD_NO      NUMBER        CONSTRAINT  PK_BREAD_REF_BREAD_NO   PRIMARY KEY
-	, BREAD_TEXT    VARCHAR2(20)  NOT NULL
-	, CONSTRAINT FK_BREAD_REF_BREAD_NO FOREIGN KEY(BREAD_NO) REFERENCES bread_t(BREAD_NO)
-);
-음.. INSERT에 조건문을..넣는다? 
-INSERT INTO date_manager_t(dm_note) VALUES(
-	   CASE WHEN (SYSDATE - DATE_MANAGER_T.dm_proddate) >=6 THEN '이 제품은 팔 수 없습니다.'
-		    WHEN (SYSDATE - DATE_MANAGER_T.dm_proddate) >=5 THEN '유통기한이 지났습니다.'
-		    WHEN (SYSDATE - DATE_MANAGER_T.dm_proddate) >=4 THEN '유통기한이 1일 남았습니다.'
-		    WHEN (SYSDATE - DATE_MANAGER_T.dm_proddate) >=3 THEN '유통기한이 2일 남았습니다.'
-		    WHEN (SYSDATE - DATE_MANAGER_T.dm_proddate) >=2 THEN '유통기한이 3일 남았습니다.'
-		    WHEN (SYSDATE - DATE_MANAGER_T.dm_proddate) >=1 THEN '유통기한이 4일 남았습니다.'
-		    WHEN (SYSDATE - DATE_MANAGER_T.dm_proddate) = 0 THEN '당일 생산 빵입니다.'
-		    ELSE '아직 생산되지 않은 빵입니다.'   
-		END);
-
+UPDATE date_manager_t
+SET dm_note = CASE WHEN dm_proddate <= (SYSDATE-6) THEN '이 제품은 팔 수 없습니다.'
+				   WHEN dm_proddate <= (SYSDATE-5) THEN '유통기한이 지났습니다.'
+				   WHEN dm_proddate <= (SYSDATE-4) THEN '유통기한이 1일 남았습니다.'
+				   WHEN dm_proddate <= (SYSDATE-3) THEN '유통기한이 2일 남았습니다.'
+				   WHEN dm_proddate <= (SYSDATE-2) THEN '유통기한이 3일 남았습니다.'
+				   WHEN dm_proddate <= (SYSDATE-1) THEN '유통기한이 4일 남았습니다.'
+				   WHEN dm_proddate  =  SYSDATE    THEN '당일 생산 빵입니다.'
+				 								   ELSE '아직 생산되지 않은 빵입니다.' END;
 */
 
 
@@ -319,23 +305,22 @@ INSERT INTO date_manager_t(dm_note) VALUES(
  */
 
 --NAME, PRICE, COMPANY, KIND, POSSIBLE, BARCODE, SORT
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'MART_T';
 
 -- 1, 2. 제약조건명변경
 ALTER TABLE MART_T RENAME CONSTRAINT SYS_C0010068 TO CK_MART_T_POSSIBLE;
-ALTER TABLE MART_T RENAME CONSTRAINT SYS_C0010070 TO RK_MART_T_R_BAR;
+ALTER TABLE MART_T RENAME CONSTRAINT SYS_C0010070 TO FK_MART_T_BARCODE;
 -- 3. INSERT 추가문 (REF_MART_T)
 INSERT INTO REF_MART_T(r_bar) VALUES (1234);
 INSERT INTO REF_MART_T(r_bar) VALUES (2345);
 INSERT INTO REF_MART_T(r_bar) VALUES (7890);
 INSERT INTO REF_MART_T(r_bar) VALUES (3456);
 INSERT INTO REF_MART_T(r_bar) VALUES (1004);
-INSERT INTO REF_MART_T(r_bar) VALUES (8282);
-INSERT INTO REF_MART_T(r_bar) VALUES (8282);
-INSERT INTO REF_MART_T(r_bar) VALUES (0000);
+INSERT INTO REF_MART_T(r_bar) VALUES (0000); --0으로 들어감
 -- 4. INSERT 추가문 (MART_T)
 INSERT INTO MART_T VALUES('새우깡', 1500, '농심', '봉지과자', 'O', 1234, 0001);
 INSERT INTO MART_T VALUES('빅파이', 3000, '크라운', '박스형과자', 'O', 2345, 0002);
-INSERT INTO MART_T VALUES('케챱', 4000, '오뚜기', '소스', 'O', 7890, 0003);
+INSERT INTO MART_T VALUES('케챱',   4000, '오뚜기', '소스', 'O', 7890, 0003);
 INSERT INTO MART_T VALUES('스타믹스', 2000, '하리보', '젤리', 'X', 3456, 0004);
 -- 5. DELETE 문
 DELETE FROM REF_MART_T WHERE r_bar=0000; 
