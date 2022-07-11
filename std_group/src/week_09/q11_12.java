@@ -90,15 +90,23 @@ class SutdaDeck {
 		if(c1.isKwang && c2.isKwang) {
 			result = (int)jokbo.get("KK");
 		} else {
-			result = (Integer)jokbo.get(c1.num + c2.num); 
-			// result = (Integer)jokbo.get(c1.num + c2.num); 
+			result = (Integer)jokbo.get(""+c1.num + c2.num); 
 			// c1.num과 c2.num은 int형이기때문에 ""을 붙여 String형으로 변환을 시켜줘야한다.
 			if(result == null) {
 				result =  (c1.num + c2.num) % 10 + 1000;
 			}
-			
 		}
+		p.point = result.intValue();
 		return result.intValue();
+		
+		
+		/*  아예 메서드를 사용하는 방법!
+			Integer defaultValue = (c1.num + c2.num) % 10 + 1000;
+			result = (int) jokbo.getOrDefault(String.valueOf(c1.num) + String.valueOf(c2.num), defaultValue);
+			p.point = result;
+		*/
+		
+		
 //		else if(!jokbo.containsKey(c1.num+c2.num) && !jokbo.containsKey(c2.num+c1.num)){
 //			result =  (c1.num + c2.num) % 10 + 1000;
 //		} else {
@@ -106,6 +114,7 @@ class SutdaDeck {
 //			result = (Integer)jokbo.get(c1.num + c2.num);			
 //		}
 	}
+	
 	SutdaCard pick() throws Exception {
 		SutdaCard c = null;
 		if(0 <= pos && pos < CARD_NUM) {

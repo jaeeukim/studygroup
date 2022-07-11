@@ -61,6 +61,30 @@ public class q11_14 {
 				System.out.print("다시 입력하세요.원하는 메뉴를 선택하세요.(1~3) : ");
 			}
 		}
+		/*
+		try {
+			String input = s.nextLine().trim();
+			
+			if(!input.equalsIgnoreCase("q")) {
+				// Scanner를 이용해서 화면으로 부터 데이터를 입력받는다. (','를 구분자로)
+				Scanner s2 = new Scanner(input).useDelimiter(",");
+				// 입력받은 값으로 Student인스턴스를 생성하고  record에 추가한다
+				record.add(new Student(s2.next(), s2.nextInt(), s2.nextInt(),
+				
+				s2.nextInt(), s2.nextInt(), s2.nextInt()));
+				System.out.println("잘입력되었습니다.입력을 마치려면 q를 입력하세요.");   
+			} else {
+				// 입력받은 값이 q또는 Q이면 메서드를 종료한다.
+					return;
+				}
+		} catch(Exception e) {
+			// , " ." . 입력받은 데이터에서 예외가 발생하면 입력오류입니다 를 보여주고 다시 입력받는다
+			System.out.println(" . , , , , , ' 입력오류입니다 이름 반 번호 국어성적 영어성적 수학성적 의
+			순서로 입력하세요.");
+		}
+		*/
+		
+		
 		return menu;
 	} // public static int displayMenu(){
 	
@@ -81,15 +105,19 @@ public class q11_14 {
 			3. 입력받은 데이터에서 예외가 발생하면 "입력오류입니다" 를 보여주고 다시 입력받는다. 
 			4. q또는 Q 가 입력될 때까지 2~3의 작업을 반복한다
 			*/
+			
+
+			
 			while(true) {
 				try {
-					String str = s.nextLine();
+					String str = s.nextLine().trim();
 					String[] sArr = str.split(",");
 					
-					if(str.equals("q") || str.equals("Q")) {
+					if(str.equals("q") || str.equals("Q")) { //input.equalsIgnoreCase("q")
 						return;
 					} else {
-						Student std = new Student(sArr[0], Integer.parseInt(sArr[1]), Integer.parseInt(sArr[2]), Integer.parseInt(sArr[3]), Integer.parseInt(sArr[4]), Integer.parseInt(sArr[5]));
+						Student std = new Student(sArr[0], Integer.parseInt(sArr[1]), Integer.parseInt(sArr[2]), 
+								 Integer.parseInt(sArr[3]), Integer.parseInt(sArr[4]), Integer.parseInt(sArr[5]));
 						record.add(std);
 						System.out.println("입력되었습니다\n 입력을 마치려면 q를 입력하세요. 메인화면으로 돌아갑니다."); 
 					}				
