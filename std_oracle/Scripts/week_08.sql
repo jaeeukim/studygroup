@@ -48,7 +48,7 @@ SELECT * FROM score_t;
 -- 3. 모든컬럼
 SELECT * 
   FROM student_t 
-  JOIN score_t 
+  JOIN score_t     -- FULL JOIN 가능한
  USING(stu_id)
  ORDER BY class_name;
 
@@ -105,17 +105,16 @@ SELECT stu_name
  							  						FROM club_tb
  							  					   WHERE club_name = '컴잘알'));
 
+-- WHERE STU_AGE IN (SELECT MAX(STU_AGE) FROM STUDENT_TB) 
+--   AND CLUB_NAME = '컴잘알' 							  					  
+ 							  					  
+ 							  					  
 SELECT MAX(stu_age), CLUB_ID 
   FROM STUDENT_TB
  GROUP BY club_id
  HAVING club_id IN (SELECT club_id FROM club_tb WHERE club_name = '컴잘알');
 
 SELECT * FROM STUDENT_TB;
-
-
-  JOIN CLUB_TB c  
- USING(club_id)   
- WHERE c.CLUB_NAME = '컴잘알';
 
 SELECT stu_name
  	 , stu_age
@@ -275,13 +274,14 @@ UPDATE emp_mart_tb SET hire_date = '2019-09-29' WHERE NAME = '윤아리';
 -- 3. 값 추가
 INSERT INTO mart_tb VALUES ('손소독제', 4000, '배스앤바디웍', '바디용품', 'O', 3231, 7);
 INSERT INTO emp_mart_tb VALUES ('한세정', 4300, 7, '2018-07-05');
+
 -- 4. 출력하기
 SELECT e.name 매니저이름
      , m.KIND 담당상품
      , TO_CHAR(e.hire_date, 'YY"년" MM"월" DD"일"') 고용일
   FROM emp_mart_tb e
   JOIN mart_tb m 
-    ON e.MANAGE_SORT = m.SORT ;
+    ON e.MANAGE_SORT = m.SORT;
 
 -- 5. 제약조건명 변경
 ALTER TABLE mart_tb RENAME CONSTRAINTS CK_MART_T_POSSIBLE TO CK_MART_TB_POSSIBLE;
