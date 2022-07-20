@@ -21,6 +21,8 @@
  */
 -- 관리자계정(XEPDB1)으로 권한 조회
 SELECT * FROM DBA_SYS_PRIVS WHERE GRANTEE = 'PUSER1';
+-- 현재계정으로 조회가능한 것
+SELECT * FROM USER_SYS_PRIVS;
 -- 만약 없다면
 GRANT CREATE VIEW TO 'PUSER1';
 
@@ -193,6 +195,8 @@ CREATE OR REPLACE VIEW V_STUDENT_TB
   JOIN TEACHER_TB TC
  USING (teacher_id) ;
 
+-- JOIN에 의하여 하나 이상의 기본 테이블 수정 불가능
+
 SELECT * FROM V_STUDENT_TB;
 
 -- 10. 경기도 거주 학생을 찾아라
@@ -331,13 +335,13 @@ CREATE OR REPLACE VIEW v_refund_mart_tb
 	AS SELECT name
 			, buy_date
 			, refund_date
-			, progress
+			, progressㄱ
 		 FROM refund_mart_tb;
 		
 SELECT * FROM V_REFUND_MART_TB ;
 -- 4. view에 값 넣기
 INSERT INTO	v_refund_mart_tb(name, buy_date, refund_date) VALUES ('계란30구', '20220613', '20220710');
-INSERT INTO	v_refund_mart_tb(name, buy_date, refund_date) VALUES ('새우깡', '20220709', '20220712');
+INSERT INTO	v_refund_mart_tb(name, buy_date, refund_date) VALUES ('새우깡', TO_DATE(20220709), TO_DATE(20220712));
 
 -- 5. progress 추가하기
 UPDATE v_refund_mart_tb 
